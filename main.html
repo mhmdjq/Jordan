@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jordan - The Gem of the Middle East</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #e63946;
+            --secondary-color: #457b9d;
+            --accent-color: #1d3557;
+            --background-color: #f8f9fa;
+            --text-color: #2b2d42;
+            --card-bg: #ffffff;
+            --nav-bg: rgba(248, 249, 250, 0.95);
+            --shadow: rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #ff6b6b;
+            --secondary-color: #4ecdc4;
+            --accent-color: #45b7d1;
+            --background-color: #1a1b1e;
+            --text-color: #f8f9fa;
+            --card-bg: #2d2e32;
+            --nav-bg: rgba(26, 27, 30, 0.95);
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow);
+        }
+
+        .nav-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--shadow);
+            transform: rotate(45deg);
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                       url('https://source.unsplash.com/random/1920x1080/?jordan') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(230, 57, 70, 0.3), rgba(29, 53, 87, 0.3));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        section {
+            padding: 8rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        button {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            background-color: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .tools {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 2.5rem;
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        input, textarea, select {
+            padding: 1rem;
+            border: 2px solid transparent;
+            border-radius: var(--border-radius);
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px var(--shadow);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            margin: 4rem 0;
+        }
+
+        .stat-card {
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background-color: var(--card-bg);
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icons a {
+            color: var(--text-color);
+            font-size: 1.8rem;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-item {
+            padding: 2rem;
+            position: relative;
+            width: 50%;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            top: 21%;
+            left: 10px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            transform: translateY(100%);
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Enhanced Styles */
+        .converter-widget {
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+        }
+
+        .converter-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .convert-btn {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+        }
+
+        .result-text {
+            font-size: 1.2rem;
+            font-weight: 500;
+            text-align: center;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: var(--background-color);
+            border-radius: var(--border-radius);
+        }
+
+        .exchange-rate-info {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .events-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .event-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px var(--shadow);
+            position: relative;
+        }
+
+        .event-date {
+            position: absolute;
+            top: -1rem;
+            left: 0.5rem;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .tip-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 20px var(--shadow);
+        }
+
+        .tip-card i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 80px;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                left: 0;
+                padding-right: 0;
+            }
+
+            .timeline-item::before {
+                left: 20px;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#history">History</a>
+                <a href="#tourism">Tourism</a>                
+                <a href="#tools">Tools</a>
+                <a href="#cuisine">Cuisine</a>                
+                <a href="#contact">Contact</a>
+            </div>
+            <button class="theme-toggle" aria-label="Toggle dark mode">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Welcome to Jordan</h1>
+            <p>Where ancient wonders meet modern charm - Experience the magic of the Middle East's crown jewel</p>
+        </div>
+    </div>
+
+    <section id="stats">
+        <h2>Jordan at a Glance</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">7</div>
+                <p>UNESCO World Heritage Sites</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">365</div>
+                <p>Days of Sunshine</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">-430m</div>
+                <p>Dead Sea Elevation</p>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2000+</div>
+                <p>Historical Sites</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About Jordan</h2>
+        <div class="grid">
+            <div class="card">                
+                <img src="https://i.pinimg.com/736x/65/f2/f9/65f2f946119794d4b817a5ae706948ed.jpg" alt="Jordanian Culture" width="400" height="300">
+                <div class="card-content">
+                    <h3>Rich Heritage</h3>
+                    <p>Jordan's cultural tapestry weaves together influences from ancient civilizations, religious histories, and Bedouin traditions.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://i.pinimg.com/736x/4c/53/11/4c5311ccf3ad663f33be5e64f5d24e32.jpg" alt="Jordan Geography"  width="400" height="300">
+                <div class="card-content">
+                    <h3>Diverse Landscape</h3>
+                    <p>From the Dead Sea to Wadi Rum, Jordan's geography offers breathtaking diversity in a compact area.</p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="https://i.pinimg.com/736x/32/d4/0c/32d40c4019c7527fa548bfc3880ab1ce.jpg" alt="Modern Jordan"  >
+                <div class="card-content">
+                    <h3>Modern Progress</h3>
+                    <p>Balancing tradition with innovation, featuring modern cities and sustainable tourism initiatives.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <h2>Visual Journey Through Jordan</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/736x/b8/cf/f3/b8cff3d7aff9662d944dd2e9ba9a9bdf.jpg" alt="Petra">
+                <div class="gallery-caption">
+                    <h3>The Treasury, Petra</h3>
+                    <p>Ancient wonder carved in rose-colored rock</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/736x/2d/98/d8/2d98d8eca338ab7117616cb292d07de6.jpg" alt="Dead Sea">
+                <div class="gallery-caption">
+                    <h3>Dead Sea</h3>
+                    <p>Natural spa and lowest point on Earth</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/736x/d9/fb/b2/d9fbb2d94d4b428fd8d4a30bc5c8e914.jpg" alt="Wadi Rum">
+                <div class="gallery-caption">
+                    <h3>Wadi Rum</h3>
+                    <p>The Valley of the Moon</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/736x/7d/08/df/7d08df4003ec85076b96897a5c4d5d02.jpg" alt="Amman">
+                <div class="gallery-caption">
+                    <h3>Amman Citadel</h3>
+                    <p>Historical heart of the capital</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/736x/4e/9b/83/4e9b8371f02ba830eacb1f0b9f10022a.jpg" alt="Jerash">
+                <div class="gallery-caption">
+                    <h3>Jerash</h3>
+                    <p>Roman ruins in remarkable condition</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://i.pinimg.com/736x/39/8d/f0/398df0e25150350a658f7447071ab0ee.jpg" alt="Aqaba">
+                <div class="gallery-caption">
+                    <h3>Aqaba</h3>
+                    <p>Red Sea diving paradise</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://alanbatnews.net/assets/2021-12-07/images/351539_4_1638902720.jpg" alt="Al-Aries lack">
+                <div class="gallery-caption">
+                    <h3>Al-Aries lack</h3>
+                    <p>In the north</p>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://karak.gov.jo/wp-content/uploads/2021/07/%D9%83%D8%B1%D9%83.jpg" alt="Al-karak castle">
+                <div class="gallery-caption">
+                    <h3>Al-karak castle</h3>
+                    <p>In the citry of karak of the south</p>
+                </div>
+            </div>
+            <!-- Repeat for other gallery items -->
+        </div>
+    </section>
+
+    <!-- Historical Timeline -->
+    <section id="history">
+        <h2>Journey Through Time</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>7500 BCE</h3>
+                <p>First settled communities in Jordan, including 'Ain Ghazal, one of the largest known prehistoric settlements.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>312 BCE</h3>
+                <p>Petra becomes the capital of the Nabataean Kingdom, flourishing as a trade center.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>106 CE</h3>
+                <p>Roman annexation and construction of major cities including Jerash and Philadelphia (modern Amman).</p>
+            </div>
+            <div class="timeline-item">
+                <h3>636 CE</h3>
+                <p>Islamic era begins, bringing new cultural and architectural influences.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>1946</h3>
+                <p>Jordan gains independence and establishes the Hashemite Kingdom.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="tourism">
+        <h2>Tourism Highlights</h2>
+        <div class="filter-buttons">
+            <button onclick="filterAttractions('all')" class="active">All</button>
+            <button onclick="filterAttractions('historical')">Historical</button>
+            <button onclick="filterAttractions('natural')">Natural</button>
+            <button onclick="filterAttractions('cultural')">Cultural</button>
+        </div>
+        <div class="grid" id="attractions-grid"></div>
+    </section>
+
+    <section id="tools">
+        <h2>Travel Tools</h2>
+        <div class="grid">
+            <div class="tools">
+                <h3>Advanced Currency Converter</h3>
+                <div class="converter-widget">
+                    <div class="converter-inputs">
+                        <div class="input-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" id="amount" placeholder="Enter amount">
+                        </div>
+                        <div class="input-group">
+                            <label for="from-currency">From</label>
+                            <select id="from-currency">
+                                <option value="JOD">JOD - Jordanian Dinar</option>
+                                <option value="USD">USD - US Dollar</option>
+                                <option value="EUR">EUR - Euro</option>
+                                <option value="GBP">GBP - British Pound</option>
+                                <option value="AED">AED - UAE Dirham</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="to-currency">To</label>
+                            <select id="to-currency">
+                                <option value="USD">USD - US Dollar</option>
+                                <option value="JOD">JOD - Jordanian Dinar</option>
+                                <option value="EUR">EUR - Euro</option>
+                                <option value="GBP">GBP - British Pound</option>
+                                <option value="AED">AED - UAE Dirham</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="convertCurrency()" class="convert-btn">Convert</button>
+                    <div id="conversion-result" class="result-text"></div>
+                    <div class="exchange-rate-info">Exchange rates last updated: February 22, 2025</div>
+                </div>
+            </div>            
+        </div>
+    </section>
+
+    <section id="cuisine">
+        <h2>Traditional Jordanian Cuisine</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="https://qa.musafir.com/uploads/1920x1080_Delicious_Jordan_Meals_2_36c69c20ae.jpg" alt="Mansaf">
+                <div class="card-content">
+                    <h3>Mansaf</h3>
+                    <p>Jordan's national dish of lamb in fermented yogurt sauce served with rice.</p>
+                </div>
+            </div>
+            <!-- Other food cards -->
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Get in Touch</h2>
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>        
+    </section>
+
+    <footer>        
+        <p>&copy; 2025 Visit Jordan. All rights reserved.</p>
+    </footer>
+
+    <script>
+        
+
+        // Enhanced Currency Converter
+        const currencyRates = {
+            JOD: { USD: 1.41, EUR: 1.30, GBP: 1.11, AED: 5.17 },
+            USD: { JOD: 0.71, EUR: 0.92, GBP: 0.79, AED: 3.67 },
+            EUR: { JOD: 0.77, USD: 1.09, GBP: 0.86, AED: 4.01 },
+            GBP: { JOD: 0.90, USD: 1.27, EUR: 1.16, AED: 4.65 },
+            AED: { JOD: 0.19, USD: 0.27, EUR: 0.25, GBP: 0.22 }
+        };
+
+        function convertCurrency() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const from = document.getElementById('from-currency').value;
+            const to = document.getElementById('to-currency').value;
+            const resultDiv = document.getElementById('conversion-result');
+
+            if (!amount) {
+                resultDiv.textContent = 'Please enter a valid amount';
+                return;
+            }
+
+            const rate = currencyRates[from][to];
+            const result = (amount * rate).toFixed(2);
+            resultDiv.innerHTML = `${amount} ${from} = <strong>${result} ${to}</strong>`;
+        }
+
+        // Original JavaScript
+        const attractions = [{
+                name: "Petra",
+                description: "Ancient city carved in rose-colored rock, one of the New Seven Wonders of the World",
+                type: "historical",
+                image: "https://i.pinimg.com/736x/94/b1/61/94b161b34ac7ca1feb7beba2d303425f.jpg"
+            },
+            {
+                name: "Dead Sea",
+                description: "The lowest point on Earth, famous for its healing mineral-rich waters",
+                type: "natural",
+                image: "https://i.pinimg.com/736x/89/17/90/891790233c585b0c482850cae8da28d7.jpg"
+            },
+            {
+                name: "Wadi Rum",
+                description: "Dramatic desert landscape and Bedouin culture, nicknamed the Valley of the Moon",
+                type: "natural",
+                image: "https://i.pinimg.com/736x/9a/67/a4/9a67a45f97be944fd07fb57e0e4d1125.jpg"
+            },
+            {
+                name: "Jerash",
+                description: "One of the best-preserved Roman cities outside Italy",
+                type: "historical",
+                image: "https://i.pinimg.com/736x/8f/91/7c/8f917c63d332ffca92d316843c978e48.jpg"
+            },
+            {
+                name: "Amman Citadel",
+                description: "Historical site featuring ruins from multiple civilizations",
+                type: "historical",
+                image: "https://i.pinimg.com/736x/39/4e/37/394e373bb2c1f5d58c7d3d8d37831008.jpg"
+            },
+            {
+                name: "Traditional Crafts Market",
+                description: "Experience local artisans and traditional Jordanian crafts",
+                type: "cultural",
+                image: "https://i.pinimg.com/736x/80/3c/e2/803ce2e708cf3ebb6694b9a8eba96dac.jpg"
+            }];
+
+        const weatherData = { Amman: { temp: 25, condition: "Sunny", humidity: "45%", icon: "sun" },
+            Petra: { temp: 28, condition: "Clear", humidity: "35%", icon: "cloud-sun" },
+            Aqaba: { temp: 32, condition: "Sunny", humidity: "60%", icon: "sun" }};
+
+        const phrases = [{ english: "Hello", arabic: "Marhaba", pronunciation: "Mar-ha-ba" },
+            { english: "Thank you", arabic: "Shukran", pronunciation: "Shook-ran" },
+            { english: "Please", arabic: "Min fadlak", pronunciation: "Min fad-lak" },
+            { english: "Welcome", arabic: "Ahlan wa sahlan", pronunciation: "Ah-lan wa sah-lan" }];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            filterAttractions('all');
+            initializeWeatherWidget();
+            initializePhrasesWidget();
+        });
+
+        function filterAttractions(type) {
+            const grid = document.getElementById('attractions-grid');
+            grid.innerHTML = '';
+            
+            const filtered = type === 'all' ? attractions : attractions.filter(a => a.type === type);
+            
+            filtered.forEach(attraction => {
+                grid.innerHTML += `
+                    <div class="card">
+                        <img src="${attraction.image}" alt="${attraction.name}">
+                        <div class="card-content">
+                            <h3>${attraction.name}</h3>
+                            <p>${attraction.description}</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // Theme Toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.dataset.theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+            themeToggle.innerHTML = document.body.dataset.theme === 'dark' 
+                ? '<i class="fas fa-sun"></i>' 
+                : '<i class="fas fa-moon"></i>';
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                const offset = target.offsetTop - 80;
+                window.scrollTo({ top: offset, behavior: 'smooth' });
+            });
+        });
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const button = event.target.querySelector('button');
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            setTimeout(() => {
+                button.innerHTML = '<i class="fas fa-check"></i> Sent!';
+                event.target.reset();
+                setTimeout(() => button.innerHTML = 'Send Message', 2000);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
